@@ -1,12 +1,22 @@
 package reporting;
 
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+
 import java.io.IOException;
 import java.util.Map;
 
 public class AllureManager {
 
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public static byte[] attachScreenshot(WebDriver driver) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
     public static void generateAndOpenReport() {
-        //temporary solution
+        //temporary solution for local run
         //TODO refactor method to get path for user allure folder depends on platform,etc
 
         String userDir = System.getProperty("user.dir");
@@ -22,4 +32,6 @@ public class AllureManager {
             e.printStackTrace();
         }
     }
+
+
 }

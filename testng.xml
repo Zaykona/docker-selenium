@@ -4,13 +4,13 @@
     <test name="Chrome">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="tests.DockerSeleniumExampleTest"></class>
+            <class name="tests.ui.UiTests"></class>
         </classes>
     </test>
     <test name="Firefox">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="tests.DockerSeleniumExampleTest"></class>
+            <class name="tests.ui.UiTests"></class>
         </classes>
     </test>
 </suite>

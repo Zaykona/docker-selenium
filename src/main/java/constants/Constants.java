@@ -8,7 +8,13 @@ public class Constants {
     }
 
     public static class Application {
-        public final static String APP_URL = "https://www.integrivideo.com/demo/5d4c247cb8384b1bef0292f0";
+        public final static String APP_URL = "https://www.integrivideo.com/demo/chat/new";
+    }
+
+    public static class TimeConstants {
+        public static final int TIME_30 = 30;
+        public static final int TIME_1000 = 1000;
+
     }
 
 }
