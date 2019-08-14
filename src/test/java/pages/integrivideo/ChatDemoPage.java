@@ -1,6 +1,5 @@
 package pages.integrivideo;
 
-import listeners.TestListeners;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -54,12 +53,15 @@ public class ChatDemoPage extends BasePage {
     @FindBy(xpath = "//div[@class='integri-chat-message-text']")
     private List<WebElement> messagesList;
 
+    @FindBy(xpath = "//span[@class='integri-chat-message-date']")
+    private List<WebElement> dateList;
+
 
     public ChatDemoPage(WebDriver driver) {
         super(driver);
     }
 
-    public void checkChatDisplayed() {
+    public void waitChatDisplayed() {
         LOGGER.info("Waiting for chat window displayed.");
         ElementUtils.waitForElementDisplayed(driver, chatWindow);
         ElementUtils.waitForElementDisplayed(driver, integrityWatermark);
@@ -91,4 +93,7 @@ public class ChatDemoPage extends BasePage {
     }
 
 
+    public String getDateOfMessage() {
+        return dateList.get(0).getText();
+    }
 }
