@@ -1,14 +1,13 @@
-package listeners;
+package common.listeners;
 
+import common.driver.DriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
+import org.testng.*;
 import reporting.AllureManager;
 
-public class TestListeners implements ITestListener {
+public class TestListeners implements ITestListener, IInvokedMethodListener {
 
     private final static Logger LOGGER = LogManager.getLogger(TestListeners.class.getName());
 
@@ -27,13 +26,13 @@ public class TestListeners implements ITestListener {
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         AllureManager.attachScreenshot((WebDriver) iTestResult.getTestContext().
-                getAttribute("driver"));
+                getAttribute("common/driver"));
         teardownTest(iTestResult);
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-
+        teardownTest(iTestResult);
     }
 
     @Override
@@ -49,14 +48,23 @@ public class TestListeners implements ITestListener {
 
     @Override
     public void onFinish(ITestContext iTestContext) {
+
     }
 
     private void teardownTest(ITestResult result) {
         String status = result.isSuccess() ? "SUCCESS" : "FAILURE";
         LOGGER.info("======" + status + "======");
         LOGGER.info("Test: " + result.getInstanceName() + "." + result.getName());
-
     }
 
 
+    @Override
+    public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
+
+    }
+
+    @Override
+    public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
+
+    }
 }

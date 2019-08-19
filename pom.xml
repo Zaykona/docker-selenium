@@ -36,7 +36,7 @@
                     <property>
                         <name>listener</name>
                         <value>
-                            listeners.TestListeners,listeners.SuiteListeners
+                            common.listeners.TestListeners,common.listeners.SuiteListeners
                         </value>
                     </property>
                     </properties>
@@ -133,9 +133,9 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.17</version>
         </dependency>
-
-
-    </dependencies>
-
-
-</project>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.3.7.Final</version>
+        </dependency>
+    </dependencies></project>

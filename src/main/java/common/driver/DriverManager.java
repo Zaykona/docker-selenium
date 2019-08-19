@@ -1,4 +1,4 @@
-package driver;
+package common.driver;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -11,7 +11,7 @@ public class DriverManager {
             webDriver.set(DriverFactory.createDriver(browser));
         }
         return webDriver.get();
-    }
+}
 
     public static void stopDriver() {
         webDriver.get().quit();

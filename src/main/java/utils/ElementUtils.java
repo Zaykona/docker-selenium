@@ -1,8 +1,6 @@
 package utils;
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.function.Function;
@@ -28,5 +26,21 @@ public class ElementUtils {
                 });
     }
 
+    public static void waitForElementDissapeared(WebDriver driver, WebElement el, int timeInSec) {
+        new FluentWait<WebDriver>(driver).withTimeout(timeInSec, SECONDS)
+                .pollingEvery(1, SECONDS)
+                .withMessage(String.format("Element visible after %s sec.", timeInSec))
+                .until(new Function<WebDriver, Boolean>() {
+                    public Boolean apply(WebDriver driver) {
+                        boolean isPresent = true;
+                        try {
+                            el.isDisplayed();
+                        } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException ex) {
+                            isPresent = false;
+                        }
+                        return !isPresent;
+                    }
+                });
+    }
 
 }

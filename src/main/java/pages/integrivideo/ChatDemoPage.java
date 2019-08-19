@@ -2,6 +2,7 @@ package pages.integrivideo;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static constants.Constants.TimeConstants.TIME_1000;
+import static constants.Constants.TimeConstants.TIME_3;
 
 public class ChatDemoPage extends BasePage {
 
@@ -56,6 +58,14 @@ public class ChatDemoPage extends BasePage {
     @FindBy(xpath = "//span[@class='integri-chat-message-date']")
     private List<WebElement> dateList;
 
+    @FindBy(xpath = "//div[contains(@class, 'integri-modal-shown')]")
+    private WebElement settingsWindow;
+
+    @FindBy(name = "userEmail")
+    private WebElement userEmailInput;
+
+    @FindBy(xpath = "//button[contains(@class, 'integri-user-settings-save')]")
+    private WebElement saveSettingsButton;
 
     public ChatDemoPage(WebDriver driver) {
         super(driver);
@@ -96,4 +106,24 @@ public class ChatDemoPage extends BasePage {
     public String getDateOfMessage() {
         return dateList.get(0).getText();
     }
+
+
+    public boolean setEmailInSettings(String email) {
+        openSettings();
+        ElementUtils.waitForElementDisplayed(driver, userEmailInput);
+        userEmailInput.sendKeys(email);
+        saveSettingsButton.click();
+        try {
+            ElementUtils.waitForElementDissapeared(driver, settingsWindow, TIME_3);
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+    public void openSettings() {
+        settingsButton.click();
+    }
+
+
 }

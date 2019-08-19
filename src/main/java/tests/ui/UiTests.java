@@ -1,6 +1,6 @@
 package tests.ui;
 
-import driver.DriverManager;
+import common.driver.DriverManager;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -27,7 +27,7 @@ public class UiTests {
     @BeforeMethod
     public void setUp(String browser, ITestContext context) {
         driver = new DriverManager().getDriver(browser);
-        context.setAttribute("driver", driver);
+        context.setAttribute("common/driver", driver);
         driver.get(APP_URL);
 
     }
@@ -41,6 +41,7 @@ public class UiTests {
         String uiComponentsErrors = chatPage.validateUiComponents();
         assertTrue(uiComponentsErrors.isEmpty(), uiComponentsErrors);
 
+
     }
 
     @Description("Check send message displayed in chat area.")
@@ -52,6 +53,7 @@ public class UiTests {
         chatPage.sendMessage(TEST_MESSAGE);
         assertTrue(chatPage.IsMessageInChatWindow(TEST_MESSAGE),
                 String.format("There are no message - %s - in chat window.", TEST_MESSAGE));
+
     }
 
 
@@ -66,8 +68,8 @@ public class UiTests {
                 "Uncorrect message time.");
     }
 
-    @AfterMethod
-    public void tearDown() throws Exception {
+    @AfterMethod(alwaysRun = true)
+    public void tearDown()  {
         DriverManager.stopDriver();
     }
 }

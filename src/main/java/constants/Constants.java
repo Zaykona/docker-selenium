@@ -12,9 +12,14 @@ public class Constants {
     }
 
     public static class TimeConstants {
+        public static final int TIME_3 = 3;
+        public static final int TIME_5 = 5;
         public static final int TIME_30 = 30;
         public static final int TIME_1000 = 1000;
 
+
     }
+
+
 
 }

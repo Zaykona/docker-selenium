@@ -1,4 +1,4 @@
-package driver;
+package common.driver;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;

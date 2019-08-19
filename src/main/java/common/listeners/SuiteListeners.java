@@ -1,4 +1,4 @@
-package listeners;
+package common.listeners;
 
 import reporting.AllureManager;
 import org.apache.logging.log4j.LogManager;
@@ -19,7 +19,10 @@ public class SuiteListeners implements ISuiteListener {
     @Override
     public void onFinish(ISuite suite) {
         LOGGER.info("========SUITE FINISH========");
+        //for local run
         AllureManager.generateAndOpenReport();
 
     }
+
+
 }
