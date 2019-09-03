@@ -1,6 +1,6 @@
 package db;
 
-import models.ValidAddresses;
+import models.Addresses;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -26,7 +26,7 @@ public class HibernateUtil {
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
                 configuration.setProperties(settings);
-                configuration.addAnnotatedClass(ValidAddresses.class);
+                configuration.addAnnotatedClass(Addresses.class);
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
                 sessionFactory.set(configuration.buildSessionFactory(serviceRegistry));

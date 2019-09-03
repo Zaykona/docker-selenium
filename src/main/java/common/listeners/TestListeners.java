@@ -1,6 +1,5 @@
 package common.listeners;
 
-import common.driver.DriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -26,7 +25,7 @@ public class TestListeners implements ITestListener, IInvokedMethodListener {
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         AllureManager.attachScreenshot((WebDriver) iTestResult.getTestContext().
-                getAttribute("common/driver"));
+                getAttribute("driver"));
         teardownTest(iTestResult);
     }
 

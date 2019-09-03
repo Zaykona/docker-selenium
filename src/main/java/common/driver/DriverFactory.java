@@ -1,7 +1,8 @@
 package common.driver;
 
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -14,26 +15,23 @@ public class DriverFactory {
 
     private static final String HUB_URL = "http://127.0.0.1:4444/wd/hub";
     private static RemoteWebDriver driver;
-    private static ThreadLocal<DesiredCapabilities> capabilities = new ThreadLocal<>();
-
+    private static  ThreadLocal<AbstractDriverOptions> options = new ThreadLocal<>();;
 
     protected static RemoteWebDriver createDriver(String browser) {
         switch (browser) {
             case FIREFOX:
-                capabilities.set(DesiredCapabilities.firefox());
+                options.set(new FirefoxOptions());
                 break;
             case CHROME:
             default:
-                capabilities.set(DesiredCapabilities.chrome());
+                options.set(new ChromeOptions());
                 break;
         }
         try {
-            driver = new RemoteWebDriver(new URL(HUB_URL), capabilities.get());
+            driver = new RemoteWebDriver(new URL(HUB_URL), options.get());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        capabilities.get().setPlatform(Platform.LINUX);
-        capabilities.get().setVersion("");
         return driver;
     }
 }
